@@ -1,0 +1,12 @@
+CHECKPOINT=logs/Omint3D/ornaments_001_maskloss_baseline/epoch_04400_iteration_000220000_checkpoint.pt
+OUTPUT_MESH=exp/Omint3D/ornaments_001_baseline/220k_baseline_2048_64.ply
+CONFIG=logs/Omint3D/ornaments_001_baseline/config.yaml
+RESOLUTION=2048
+BLOCK_RES=64
+GPUS=1  # use >1 for multi-GPU mesh extraction
+torchrun --nproc_per_node=${GPUS} projects/neuralangelo/scripts/extract_mesh.py \
+    --config=${CONFIG} \
+    --checkpoint=${CHECKPOINT} \
+    --output_file=${OUTPUT_MESH} \
+    --resolution=${RESOLUTION} \
+    --block_res=${BLOCK_RES}
